@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	
+	<!-- sao declarados nesta tag a lista de configuracoes para colocar o JPA em funcionamento -->
+	<persistence-unit name="projetojsf">
+	
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.com.entidades.Pessoa</class>
+		
+		<properties>
+		
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cadastroprojetojsf"/>
+			<property name="javax.persistence.jdbc.user" value="postgres"/>
+			<property name="javax.persistence.jdbc.password" value="admin"/>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			
+		 <!-- MySQL
+		 	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cadastroprojetojsf"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="admin"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		 -->
+			
+		</properties>
+	
+	</persistence-unit>
+</persistence>
