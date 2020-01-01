@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped; //mantem o objeto, até que o cliente navegue para a proxima tela
 import javax.faces.context.ExternalContext;
@@ -27,10 +28,18 @@ public class PessoaBean {
 	public String salvar(){
 		pessoa = daoGeneric.merge(pessoa);
 		carregarPessoas();
+		mostrarMsg("Cadastrado com sucesso!");
 		
 		return "";
 	}
 	
+	private void mostrarMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(msg);
+		context.addMessage(null, message);
+		
+	}
+
 	public String novo(){
 		pessoa = new Pessoa();
 		return "";
@@ -40,6 +49,7 @@ public class PessoaBean {
 		daoGeneric.deletePorId(pessoa);
 		pessoa = new Pessoa();
 		carregarPessoas();
+		mostrarMsg("Removido com sucesso!");
 		return "";
 	}
 	

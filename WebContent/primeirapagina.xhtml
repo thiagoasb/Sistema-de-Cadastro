@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui = "http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Cadastro de Usuário</title>
@@ -11,12 +12,7 @@
 
 <h:body>
 	
-	<h:form>
-		<h:commandButton value="Administração" action="primeirapagina" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
-		<h:commandButton value="Lançamentos" action="lancamento" style="margin-left:0.5cm;"/>
-		<h:commandButton value="Trocar Usuário" action="index" style="margin-left:0.5cm;"/>
-		
-	</h:form>
+	<ui:include src="/menu.xhtml"></ui:include>
 	
 	<h:form id="formPessoa" style="margin-top:5%; margin-left:40%" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 
@@ -25,6 +21,7 @@
 
 		<h1>TELA DE CADASTRO</h1>
 		
+		<h:messages infoStyle="color:green"/>
 		
 		<h:panelGrid columns="2" rendered="true">
 			<f:facet name="header">
@@ -52,7 +49,11 @@
 			
 			</h:selectOneMenu>
 			
-			
+			<h:outputLabel value="Data de Nascimento:"/>
+			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data em formato inválido" >
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
+			</h:inputText>
+
 			<h:outputLabel value="Frameworks:" />
 			<h:selectManyMenu id="campoFrameworks" value="#{pessoaBean.pessoa.frameworks}" style="height:100px">
 				
@@ -83,6 +84,24 @@
 				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="recepcionista"/>
 			
 			</h:selectOneMenu>
+			
+			<h:outputLabel value="Programador:" />
+			<h:selectOneRadio value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
+			 	<f:selectItem itemValue="JUNIOR" itemLabel="Junior"/>
+			 	<f:selectItem itemValue="PLENO" itemLabel="Pleno"/>
+			 	<f:selectItem itemValue="SENIOR" itemLabel="Sênior"/>
+			 	<f:selectItem itemValue="EXPECIALISTA" itemLabel="Expecialista"/>
+			 </h:selectOneRadio>
+			 
+			 <h:outputLabel value="Linguagens:"/>
+			 <h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
+			 	<f:selectItem itemValue="1" itemLabel="Java"/>
+			 	<f:selectItem itemValue="2" itemLabel="PHP"/>
+			 	<f:selectItem itemValue="3" itemLabel="Python"/>
+			 	<f:selectItem itemValue="4" itemLabel="C#"/>
+			 	<f:selectItem itemValue="5" itemLabel="C/C++"/>
+			 </h:selectManyCheckbox>
+			
 			
 			<h:outputLabel/>
 			<h:panelGroup>
