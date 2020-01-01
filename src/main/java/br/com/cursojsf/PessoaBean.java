@@ -74,7 +74,7 @@ public class PessoaBean {
 	
 	public String logar(){
 		
-		System.out.println(pessoa.getLogin() + "  " + pessoa.getSenha());
+		//System.out.println(pessoa.getLogin() + "  " + pessoa.getSenha());
 		
 		Pessoa pessoaUser = iDaoPessoa.consultarUsuario(pessoa.getLogin(), pessoa.getSenha());
 		
@@ -82,13 +82,21 @@ public class PessoaBean {
 			//adicionar o usuário na sessão usuarioLogado
 			FacesContext context = FacesContext.getCurrentInstance(); //para pegar alguma informação do ambiente de execução do jsf
 			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("usuarioLogado", pessoaUser.getLogin()); 
+			externalContext.getSessionMap().put("usuarioLogado", pessoaUser); 
 			
 			
 			return "primeirapagina.jsf";
 		}
 		
 		return "index.jsf";
+	}
+	
+	public boolean permiteAcesso(String acesso){
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		Pessoa pessoaUser = (Pessoa)externalContext.getSessionMap().get("usuarioLogado"); 
+		
+		return pessoaUser.getPerfilUser().equals(acesso);
 	}
 	
 	
