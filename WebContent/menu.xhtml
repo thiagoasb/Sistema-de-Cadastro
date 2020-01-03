@@ -5,9 +5,9 @@
 	  xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:form>
-		<h:commandButton value="Administração" action="primeirapagina" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
-		<h:commandButton value="Lançamentos" action="lancamento" style="margin-left:0.5cm;"/>
-		<h:commandButton value="Trocar Usuário" action="index" style="margin-left:0.5cm;"/>
+		<h:commandLink value="Administração" action="primeirapagina" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" style="margin-left:26cm;"/>
+		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:0.5cm;"/>
+		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.5cm;"/>
 		
 	</h:form>
 

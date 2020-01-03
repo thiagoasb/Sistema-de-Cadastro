@@ -32,13 +32,16 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 
 			<h:outputLabel value="Nome:" />
-			<h:inputText value="#{pessoaBean.pessoa.nome}" />
+			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Informe o nome do usuário" validatorMessage="Nome precisa ter no mínimo 3 caracteres" >
+				<f:validateLength minimum="3" maximum="50"/>
+			</h:inputText>
 
 			<h:outputLabel value="Sobrenome:" />
-			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" required="true" requiredMessage="Informe o sobrenome"/>
+
 
 			<h:outputLabel value="Idade:" />
-			<h:inputText value="#{pessoaBean.pessoa.idade}" />
+			<h:inputText value="#{pessoaBean.pessoa.idade}" required="true" requiredMessage="Informe a idade do usuário"/>
 			
 			<h:outputLabel value="Sexo:" />
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="false">
@@ -70,10 +73,13 @@
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 			
 			<h:outputLabel value="Login:"/>
-			<h:inputText value="#{pessoaBean.pessoa.login}"/>
+			<h:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login" validatorMessage="O login dever ser maior que 3 e menor que 10">
+				<f:validateLength minimum="3" maximum="10"/>
+			</h:inputText>
 			
 			<h:outputLabel value="Senha:"/>
-			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}" required="true">
+			</h:inputSecret>
 			
 			<h:outputLabel value="Perfil:"/>
 			<h:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}" required="false">
@@ -108,13 +114,14 @@
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/save-user.png" title="Salvar"/>
 				<h:commandButton style="margin-left:0.5cm;" value="Novo" action="#{pessoaBean.novo}" image="resources/img/new-user.png" title="Novo" />
 				<h:commandButton style="margin-left:0.5cm;" value="Remover" action="#{pessoaBean.remove}" image="resources/img/remove-user.png" title="Remover" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton style="margin-left:0.5cm;" value="Limpar" type="reset" image="resources/img/clear.png" title="Limpar"/>
+				<h:commandButton style="margin-left:0.5cm;" value="Limpar" action="#{pessoaBean.novo}" image="resources/img/clear.png" title="Limpar"/>
 			</h:panelGroup>
 
 		</h:panelGrid>
 
-		
-
+	</h:form>
+	
+	<h:form id="formTabelaPessoas" style="margin-top:2%; margin-left:40%">
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="3" cellpadding="6">
 			<f:facet name="header">
 				Lista de Usuários Cadastrados
