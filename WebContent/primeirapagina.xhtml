@@ -111,17 +111,21 @@
 			
 			<h:outputLabel/>
 			<h:panelGroup>
+				<h:commandButton style="margin-left:0.5cm;" id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/new-user.png" title="Novo" >
+					<f:ajax execute="botaoNovo" render="@form"/>
+				</h:commandButton>
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/save-user.png" title="Salvar"/>
-				<h:commandButton style="margin-left:0.5cm;" value="Novo" action="#{pessoaBean.novo}" image="resources/img/new-user.png" title="Novo" />
 				<h:commandButton style="margin-left:0.5cm;" value="Remover" action="#{pessoaBean.remove}" image="resources/img/remove-user.png" title="Remover" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton style="margin-left:0.5cm;" value="Limpar" action="#{pessoaBean.novo}" image="resources/img/clear.png" title="Limpar"/>
+				<h:commandButton style="margin-left:0.5cm;" id="botaoLimpar" value="Limpar" action="#{pessoaBean.novo}" image="resources/img/clear.png" title="Limpar">
+					<f:ajax execute="botaoLimpar" render="@form"/>
+				</h:commandButton>
 			</h:panelGroup>
 
 		</h:panelGrid>
 
 	</h:form>
 	
-	<h:form id="formTabelaPessoas" style="margin-top:2%; margin-left:40%">
+	<h:form id="formTable" style="margin-top:2%; margin-left:40%">
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="3" cellpadding="6">
 			<f:facet name="header">
 				Lista de Usuários Cadastrados
