@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui = "http://java.sun.com/jsf/facelets">
+	  xmlns:ui = "http://java.sun.com/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>Cadastro de Usuário</title>
@@ -69,16 +70,44 @@
 			
 			</h:selectManyMenu>
 			
+			<h:outputLabel value="----------------------"/>
+			<h:outputLabel value=""/>
+			
+			<h:outputLabel value="CEP:"/>
+			<h:inputText value="#{pessoaBean.pessoa.cep}" >
+				<f:ajax event="blur" execute="@this" 
+				listener="#{pessoaBean.pesquisaCep}" 
+				render="logradouro complemento bairro localidade uf"/>
+			</h:inputText> 
+			
+			<h:outputLabel value="Logradouro:"/>
+			<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro" style="color:Gray"/>
+			
+			<h:outputLabel value="Complemento:"/>
+			<h:inputText value="#{pessoaBean.pessoa.complemento}" id="complemento" style="color:Gray"/>
+			
+			<h:outputLabel value="Bairro:"/>
+			<h:inputText value="#{pessoaBean.pessoa.bairro}" id="bairro" style="color:Gray"/>
+			
+			<h:outputLabel value="Localidade:"/>
+			<h:inputText value="#{pessoaBean.pessoa.localidade}" id="localidade" style="color:Gray"/>
+			
+			<h:outputLabel value="UF:"/>
+			<h:inputText value="#{pessoaBean.pessoa.uf}" id="uf" style="color:Gray"/>
+			
+			<h:outputLabel value="----------------------"/>
+			<h:outputLabel value=""/>
+			
 			<h:outputLabel value="Ativo:"/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 			
 			<h:outputLabel value="Login:"/>
-			<h:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login" validatorMessage="O login dever ser maior que 3 e menor que 10">
+			<h:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login" validatorMessage="O login dever ser maior que 3 e menor que 10" pt:placeholder="Informe o login">
 				<f:validateLength minimum="3" maximum="10"/>
 			</h:inputText>
 			
 			<h:outputLabel value="Senha:"/>
-			<h:inputSecret value="#{pessoaBean.pessoa.senha}" required="true">
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}" required="true" pt:placeholder="*******">
 			</h:inputSecret>
 			
 			<h:outputLabel value="Perfil:"/>

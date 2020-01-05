@@ -1,5 +1,10 @@
 package br.com.cursojsf;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +14,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped; //mantem o objeto, até que o cliente navegue para a proxima tela
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
+
+import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
@@ -101,6 +110,20 @@ public class PessoaBean {
 		return "index.jsf";
 	}
 	
+	public String deslogar(){
+		
+		FacesContext context = FacesContext.getCurrentInstance(); //para pegar alguma informação do ambiente de execução do jsf
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado"); 
+		
+		HttpServletRequest httpServletRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		
+		httpServletRequest.getSession().invalidate();
+		
+		
+		return "index.jsf";
+	}
+	
 	public boolean permiteAcesso(String acesso){
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
@@ -109,5 +132,37 @@ public class PessoaBean {
 		return pessoaUser.getPerfilUser().equals(acesso);
 	}
 	
+	public void pesquisaCep(AjaxBehaviorEvent event){
+		try {
+			URL url = new URL("https://viacep.com.br/ws/" + pessoa.getCep() + "/json/");
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+			String cep = "";
+			StringBuilder jsonCep = new StringBuilder();
+			
+			while((cep = br.readLine()) != null){
+				jsonCep.append(cep);
+			}
+			
+			Pessoa gsonAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class); //recebe o json e a classe q ele vai converter
+			
+			pessoa.setCep(gsonAux.getCep());
+			pessoa.setLogradouro(gsonAux.getLogradouro());
+			pessoa.setComplemento(gsonAux.getComplemento());
+			pessoa.setBairro(gsonAux.getBairro());
+			pessoa.setLocalidade(gsonAux.getLocalidade());
+			pessoa.setUf(gsonAux.getUf());
+			pessoa.setIbge(gsonAux.getIbge());
+			pessoa.setGia(gsonAux.getGia());
+			
+			
+			System.out.println(gsonAux);
+			
+		} catch (Exception e) {
+			mostrarMsg("Erro ao consultar o CEP");
+		}
+	}
 	
 }
