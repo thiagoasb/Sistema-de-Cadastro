@@ -137,6 +137,20 @@
 			 	<f:selectItem itemValue="5" itemLabel="C/C++"/>
 			 </h:selectManyCheckbox>
 			
+			<h:outputLabel value="Estados:"/>
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true">
+			<!-- quando usar o ajax sempre usar o immediate="true" para ele conseguir passar a fase de validação do jsf  
+			se tiver alguma validação no formulário não conseguimos executar o ajax por baixo dos panos e conseguir chamar o metodo do lado do servidor-->
+				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+				<f:selectItems value="#{pessoaBean.estados}" />
+				<f:ajax event="change" execute="@this" render="comboCidades" listener="#{pessoaBean.carregaCidades}"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Cidades:"/>
+			<h:selectOneMenu value="#{pessoaBean.pessoa.cidade}" id="comboCidades">
+				<f:selectItem noSelectionOption="true" itemLabel="--[selecione]--"/>
+				<f:selectItems value="#{pessoaBean.cidades}"/>			
+			</h:selectOneMenu>
 			
 			<h:outputLabel/>
 			<h:panelGroup>

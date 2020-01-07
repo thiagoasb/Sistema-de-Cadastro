@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 //identifica a classe e trasnforma numa tabela no banco de dados
@@ -56,7 +58,19 @@ public class Pessoa implements Serializable{
 	private String ibge;
 	private String gia;
 	
+	@ManyToOne
+	private Cidades cidade;
 	
+	@Transient /*Nao fica persistente*/
+	private Estados estados;
+	
+	public void setEstados(Estados estados) {
+		this.estados = estados;
+	}
+	
+	public Estados getEstados() {
+		return estados;
+	}
 	
 	public String getLogradouro() {
 		return logradouro;
@@ -252,6 +266,15 @@ public class Pessoa implements Serializable{
 	public void setFrameworks(String[] frameworks) {
 		this.frameworks = frameworks;
 	}
+
+	public Cidades getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidades cidade) {
+		this.cidade = cidade;
+	}
+	
 	
 	
 }
