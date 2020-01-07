@@ -7,9 +7,10 @@ Ao acessar o sistema o usuário é direcionado para a primeira página onde deve
 
 Após logar estará aberto a página de cadastro de usuário, que apenas o usuário cadastrado como administrador terá acesso. Todos os campos de informação são obrigatórios.
 
-![telaCadastro1](https://user-images.githubusercontent.com/38672183/71686342-b178d400-2d79-11ea-9e0c-51c1b49a438c.png)
-![telaCadastro2](https://user-images.githubusercontent.com/38672183/71686344-b473c480-2d79-11ea-89d8-9b4744ec3464.png)
+![cadastro1](https://user-images.githubusercontent.com/38672183/71897177-8d7c1080-3134-11ea-9775-c66e9c809e7d.png)
+![cadastro2](https://user-images.githubusercontent.com/38672183/71897185-9240c480-3134-11ea-98e5-cc25eb2bd625.png)
+![cadastro3](https://user-images.githubusercontent.com/38672183/71897192-953bb500-3134-11ea-9b34-e2b4a697695a.png)
 
 Todos os usuários tem acesso a página de lançamentos, que é onde são cadastrados os produtos.
 
-![telaCadastroProdutos](https://user-images.githubusercontent.com/38672183/71686350-b8074b80-2d79-11ea-9860-ccb5625c9145.png)
+![telaCadastroProdutos](https://user-images.githubusercontent.com/38672183/71897326-067b6800-3135-11ea-94cb-daf2f34b2e54.png)
